@@ -19,7 +19,7 @@ export const Header = styled.div`
   border-bottom: 1px solid #ddd;
 `
 
-const Check = styled.div`
+export const Check = styled.div`
   float: left;
   height: 30px;
   width: 30px;
