@@ -2,6 +2,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   context: path.join(__dirname, 'src'),
@@ -33,7 +34,8 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
-    })
+    }),
+    //new BundleAnalyzerPlugin({generateStatsFile: true}),
   ],
   resolve: {
     extensions: ['', '.js', '.jsx'],
