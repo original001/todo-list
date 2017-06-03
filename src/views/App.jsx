@@ -1,24 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
+import {Wrapper, Sheet, Header, Item} from './App.st.js';
 
-const Wrapper = styled.div`
-  padding: 20px;
-  text-align: center;
-  color: green;
-`
-
-const Text = styled.div`
-  padding: 10px;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: ${props => props.big ? '20px' : '14px'};
-`
+const list = [{
+  checked: true,
+  name: 'some name',
+}, {
+  checked: false,
+  name: 'another name',
+}]
 
 export default class App extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Text big>Hello, world!</Text>
+        <Sheet>
+          <Header>Schedule</Header>
+          {list.map(item =>
+            <Item checked={item.checked}>{item.name}</Item>
+          )}
+        </Sheet>
       </Wrapper>
     )
   }

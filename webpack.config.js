@@ -2,7 +2,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   context: path.join(__dirname, 'src'),
@@ -21,9 +21,6 @@ module.exports = {
         loader: 'babel',
         query: {
           presets: ['es2015', 'stage-2', 'react'],
-          plugins: [
-            'css-to-js'
-          ],
         },
         include: [
           path.join(__dirname, 'src'),
@@ -33,7 +30,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"development"'
+      'process.env.NODE_ENV': '"development"',
     }),
     //new BundleAnalyzerPlugin({generateStatsFile: true}),
   ],

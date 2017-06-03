@@ -9,6 +9,7 @@ injectGlobal`
     margin: 0;
     font: 14px Helvetica, arial;
     line-height: 1.42;
+    background: #f1f1f1;
   }
 `
 
