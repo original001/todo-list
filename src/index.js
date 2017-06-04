@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import App from './views/App';
 import {injectGlobal} from 'styled-components';
+import './reset';
 
 injectGlobal`
   body {
@@ -13,4 +14,4 @@ injectGlobal`
   }
 `
 
-ReactDom.render( <App />, document.getElementById('container'));
+ReactDom.render( <App/>, document.getElementById('container'));
