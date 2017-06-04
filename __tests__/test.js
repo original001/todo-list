@@ -26,11 +26,11 @@ describe('App', function() {
   it('should add one todo if not empty message and will be cleared', () => {
     const wrapper = mount(<App todos={this.todos}/>);
     const input = wrapper.find(Input);
-    input.simulate('keydown', {keyCode: 13});
+    input.simulate('keydown', {code: 'KeyEnter'});
     expect(wrapper.find(Item).length).toBe(this.todos.length);
 
     wrapper.setState({inputValue: 'new note'});
-    input.simulate('keydown', {keyCode: 13});
+    input.simulate('keydown', {code: 'KeyEnter'});
     expect(wrapper.find(Item).length).toBe(this.todos.length + 1);
     expect(wrapper.find(Input).props().value).toBe('');
   })

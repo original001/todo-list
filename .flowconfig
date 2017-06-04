@@ -1,0 +1,17 @@
+[ignore]
+.*/styled-components/.*
+.*/testing/react-devtools/.*
+.*/fbjs/lib/fetchWithRetries.js.flow
+.*/fbjs/lib/PromiseMap.js.flow
+.*/fbjs/lib/Deferred.js.flow
+.*/fbjs/lib/resolveImmediate.js.flow
+.*/enzyme-matchers/.*
+
+[include]
+
+[libs]
+
+[options]
+esproposal.class_instance_fields=enable
+esproposal.class_static_fields=enable
+munge_underscores=true

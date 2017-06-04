@@ -1,3 +1,5 @@
+// @flow //
+
 import React from 'react';
 import styled from 'styled-components';
 import {Item} from './Item';
@@ -34,12 +36,26 @@ const FilterLink = styled.span`
   color: ${props => props.active ? 'green' : 'inherit'};
 `
 
+type FilterValue = 'all' | 'current';
+
+interface Todo {
+  id: number;
+  checked: boolean;
+  name: string;
+}
+
+interface State {
+  inputValue: string;
+  filter: FilterValue;
+  todos: Todo[];
+}
+
 let ID = 0;
 
 const getId = () => ID++
 
 export default class App extends React.Component {
-  state = {
+  state: State = {
     inputValue: '',
     todos: this.props.todos || [{
       id: getId(),
@@ -51,14 +67,14 @@ export default class App extends React.Component {
       name: 'another name',
     }],
     filter: 'all',
-  }
+  };
   render() {
     return (
       <Wrapper>
         <Sheet>
           <Input value={this.state.inputValue}
                  onChange={(e) => this.setState({inputValue: e.target.value})}
-                 onKeyDown={this.handleKeyDown}
+                 onKeyDown={this._handleKeyDown}
                />
           <Filter>
             <FilterLink active={this.state.filter === 'all'}
@@ -73,16 +89,16 @@ export default class App extends React.Component {
           {this.state.todos.filter(todo => {
             return this.state.filter === 'all' ? true : !todo.checked
           }).map((item) =>
-            <Item onClose={(e) => this.handleClose(e, item.id)}
-                  onCheck={(e) => this.handleCheck(e, item.id)}
+            <Item onClose={(e) => this._handleClose(e, item.id)}
+                  onCheck={(e) => this._handleCheck(e, item.id)}
                   key={item.id} checked={item.checked}>{item.name}</Item>
           )}
         </Sheet>
       </Wrapper>
     )
   }
-  handleKeyDown = (e) => {
-    if (e.keyCode === 13 && !!this.state.inputValue) {
+  _handleKeyDown = (e: KeyboardEvent) => {
+    if (e.code === 'KeyEnter' && !!this.state.inputValue) {
       this.setState({
         todos: [
           ...this.state.todos,
@@ -92,12 +108,12 @@ export default class App extends React.Component {
       })
     }
   }
-  handleClose = (e, id) => {
+  _handleClose = (e: Event, id: number) => {
     e.stopPropagation();
     const todos = this.state.todos.filter(todo => todo.id !== id);
     this.setState({todos})
   }
-  handleCheck = (_, id) => {
+  _handleCheck = (e: Event, id: number) => {
     const todos = this.state.todos.map(todo => todo.id !== id ? todo : {...todo, checked: !todo.checked});
     this.setState({todos})
   }
