@@ -23,13 +23,19 @@ export const Input = styled.input`
   border-bottom: 1px solid #ddd;
 `
 
+let ID = 0;
+
+const getId = () => ID++
+
 export default class App extends React.Component {
   state = {
     inputValue: '',
     todos: this.props.todos || [{
+      id: getId(),
       checked: true,
       name: 'some name',
     }, {
+      id: getId(),
       checked: false,
       name: 'another name',
     }],
@@ -43,8 +49,9 @@ export default class App extends React.Component {
                  onChange={(e) => this.setState({inputValue: e.target.value})}
                  onKeyDown={this.handleKeyDown}
                />
-          {this.state.todos.map((item, ind) =>
-            <Item key={ind} checked={item.checked}>{item.name}</Item>
+          {this.state.todos.map((item) =>
+            <Item onClose={(e) => this.handleClose(e, item.id)}
+                  key={item.id} checked={item.checked}>{item.name}</Item>
           )}
         </Sheet>
       </Wrapper>
@@ -55,10 +62,14 @@ export default class App extends React.Component {
       this.setState({
         todos: [
           ...this.state.todos,
-          {checked: false, name: this.state.inputValue},
+          {id: getId(), checked: false, name: this.state.inputValue},
         ],
         inputValue: '',
       })
     }
+  }
+  handleClose = (_, id) => {
+    const todos = this.state.todos.filter(todo => todo.id !== id);
+    this.setState({todos})
   }
 }

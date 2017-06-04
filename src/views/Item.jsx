@@ -12,7 +12,10 @@ export const Check = styled.div`
   margin: 5px 0;
   text-align: center;
   &:after {
-    content: ${props => props.checked ? '"√"' : ''};
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-size: 16px;
+    content: ${props => props.checked ? '""' : ''};
     color: green;
   }
 `
@@ -23,6 +26,7 @@ const TextItem = styled.div`
 `
 
 const ItemWrapper = styled.div`
+  position: relative;
   padding: 10px ${sheetPadding};
   border-bottom: 1px solid #ddd;
   height: 40px;
@@ -30,6 +34,27 @@ const ItemWrapper = styled.div`
   cursor: pointer;
   &:hover {
     background: #f1f1f1;
+  }
+`
+
+export const Close = styled.div`
+  position: absolute;
+  right: ${sheetPadding};
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  height: 40px;
+  text-align: right;
+  margin: auto;
+  &:after {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-size: 16px;
+    color: #888;
+    content: '';
+  }
+  &:hover:after {
+    color: #444;
   }
 `
 
@@ -43,6 +68,7 @@ export class Item extends React.Component {
       <ItemWrapper onClick={this.handleClick}>
         <Check checked={this.state.checked}/>
         <TextItem>{props.children}</TextItem>
+        <Close onClick={this.props.onClose}/>
       </ItemWrapper>
     )
   }
