@@ -59,20 +59,14 @@ export const Close = styled.div`
 `
 
 export class Item extends React.Component {
-  state = {
-    checked: this.props.checked,
-  }
   render() {
     const props = this.props;
     return (
-      <ItemWrapper onClick={this.handleClick}>
-        <Check checked={this.state.checked}/>
+      <ItemWrapper onClick={this.props.onCheck}>
+        <Check checked={this.props.checked}/>
         <TextItem>{props.children}</TextItem>
         <Close onClick={this.props.onClose}/>
       </ItemWrapper>
     )
-  }
-  handleClick = () => {
-    this.setState({checked: !this.state.checked})
   }
 }

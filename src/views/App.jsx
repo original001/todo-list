@@ -23,6 +23,17 @@ export const Input = styled.input`
   border-bottom: 1px solid #ddd;
 `
 
+export const Filter = styled.div`
+  padding: 5px ${sheetPadding};
+`
+
+const FilterLink = styled.span`
+  text-decoration: underline;
+  cursor: pointer;
+  margin-right: 20px;
+  color: ${props => props.active ? 'green' : 'inherit'};
+`
+
 let ID = 0;
 
 const getId = () => ID++
@@ -39,7 +50,7 @@ export default class App extends React.Component {
       checked: false,
       name: 'another name',
     }],
-
+    filter: 'all',
   }
   render() {
     return (
@@ -49,8 +60,21 @@ export default class App extends React.Component {
                  onChange={(e) => this.setState({inputValue: e.target.value})}
                  onKeyDown={this.handleKeyDown}
                />
-          {this.state.todos.map((item) =>
+          <Filter>
+            <FilterLink active={this.state.filter === 'all'}
+                        onClick={() => this.setState({filter: 'all'})}>
+                        Show all
+            </FilterLink>
+            <FilterLink active={this.state.filter === 'current'}
+                        onClick={() => this.setState({filter: 'current'})}>
+                        Show current
+            </FilterLink>
+          </Filter>
+          {this.state.todos.filter(todo => {
+            return this.state.filter === 'all' ? true : !todo.checked
+          }).map((item) =>
             <Item onClose={(e) => this.handleClose(e, item.id)}
+                  onCheck={(e) => this.handleCheck(e, item.id)}
                   key={item.id} checked={item.checked}>{item.name}</Item>
           )}
         </Sheet>
@@ -68,8 +92,13 @@ export default class App extends React.Component {
       })
     }
   }
-  handleClose = (_, id) => {
+  handleClose = (e, id) => {
+    e.stopPropagation();
     const todos = this.state.todos.filter(todo => todo.id !== id);
+    this.setState({todos})
+  }
+  handleCheck = (_, id) => {
+    const todos = this.state.todos.map(todo => todo.id !== id ? todo : {...todo, checked: !todo.checked});
     this.setState({todos})
   }
 }

@@ -1,34 +1,15 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import sinon from 'sinon';
+// import sinon from 'sinon';
 
-import {Item, Check, Close} from '../src/views/Item';
+import {Item, Close} from '../src/views/Item';
 import App, {Input} from '../src/views/App';
-
-describe('Item', () => {
-  it('should be checked/unchecked when clicked', () => {
-    const wrapper = mount(<Item checked={false}/>);
-    const check = wrapper.find(Check);
-    expect(check.exists()).toBe(true);
-    wrapper.simulate('click');
-    expect(check.props().checked).toBe(true);
-    wrapper.simulate('click');
-    expect(check.props().checked).toBe(false);
-  })
-  it('should call remove when close clicked', () => {
-    const onClose = sinon.spy();
-    const wrapper = mount(<Item checked={false} onClose={onClose}/>);
-    const close = wrapper.find(Close);
-    close.simulate('click');
-    expect(onClose.calledOnce).toBe(true);
-  })
-})
 
 describe('App', function() {
   beforeEach(() => {
     this.todos = [{
       id: 1,
-      checked: false,
+      checked: true,
       name: 'some name',
     }, {
       id: 2,
@@ -56,8 +37,37 @@ describe('App', function() {
 
   it('should remove item when cb has been called', () => {
     const wrapper = mount(<App todos={this.todos}/>);
-    const firstClose = wrapper.find(Close).first();
-    firstClose.simulate('click');
+    const firstItem = wrapper.find(Item).first();
+    const close = firstItem.find(Close);
+    close.simulate('click');
+    expect(wrapper.find(Item).length).toBe(this.todos.length - 1)
+  })
+
+  it('should filter', () => {
+    const wrapper = shallow(<App todos={this.todos}/>);
+    wrapper.setState({filter: 'current'});
     expect(wrapper.find(Item).length).toBe(1);
+    wrapper.setState({filter: 'all'});
+    expect(wrapper.find(Item).length).toBe(2);
+  })
+
+  it('should checking on click', () => {
+    const wrapper = mount(<App todos={this.todos}/>);
+    const firstItem = wrapper.find(Item).first();
+    const prevState = firstItem.props().checked;
+    expect(wrapper.find(Item).length).toBe(this.todos.length);
+    firstItem.simulate('click');
+    expect(firstItem.props().checked).toBe(!prevState);
+  })
+
+  it('should filter after checking', () => {
+    const wrapper = mount(<App todos={this.todos}/>);
+    wrapper.setState({filter: 'current'});
+    const visibleItems = wrapper.find(Item);
+    const uncheckedItems = wrapper.findWhere((elem) => elem.is(Item) && elem.props().checked === false);
+    expect(visibleItems.length).toBe(uncheckedItems.length);
+    const firstItem = wrapper.find(Item).first();
+    firstItem.simulate('click');
+    expect(visibleItems.length).toBe(uncheckedItems.length);
   })
 })
