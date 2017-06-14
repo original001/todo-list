@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-// import sinon from 'sinon';
 
 import {Item, Close} from '../src/views/Item';
 import App, {Input} from '../src/views/App';

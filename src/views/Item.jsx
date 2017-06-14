@@ -1,6 +1,29 @@
+// @flow //
 import React from 'react';
 import styled from 'styled-components';
 import {sheetPadding} from '../styled-variables';
+
+type Props = {
+  checked: boolean,
+  children?: React.Element[],
+  onClose: (e: Event) => void,
+  onCheck: (e: Event) => void,
+}
+
+export class Item extends React.Component {
+  props: Props;
+
+  render() {
+    const props = this.props;
+    return (
+      <ItemWrapper onClick={this.props.onCheck}>
+        <Check checked={this.props.checked}/>
+        <TextItem>{props.children}</TextItem>
+        <Close onClick={this.props.onClose}/>
+      </ItemWrapper>
+    )
+  }
+}
 
 export const Check = styled.div`
   float: left;
@@ -57,16 +80,3 @@ export const Close = styled.div`
     color: #444;
   }
 `
-
-export class Item extends React.Component {
-  render() {
-    const props = this.props;
-    return (
-      <ItemWrapper onClick={this.props.onCheck}>
-        <Check checked={this.props.checked}/>
-        <TextItem>{props.children}</TextItem>
-        <Close onClick={this.props.onClose}/>
-      </ItemWrapper>
-    )
-  }
-}

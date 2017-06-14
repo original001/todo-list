@@ -38,13 +38,13 @@ const FilterLink = styled.span`
 
 type FilterValue = 'all' | 'current';
 
-interface Todo {
+export type Todo = {
   id: number;
   checked: boolean;
   name: string;
 }
 
-interface State {
+type State = {
   inputValue: string;
   filter: FilterValue;
   todos: Todo[];
