@@ -1,5 +1,5 @@
 {
-  "name": "todo-list",
+  "name": "cd7da80b",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -38,6 +38,9 @@
     "react-dom": "^0.14.9",
     "styled-components": "^2.0.0"
   },
+  "files": [
+    "src/"
+  ],
   "jest": {
     "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
   }
