@@ -51,7 +51,7 @@ const TextItem = styled.div`
 const ItemWrapper = styled.div`
   position: relative;
   padding: 10px ${sheetPadding};
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
   height: 40px;
   line-height: 40px;
   cursor: pointer;

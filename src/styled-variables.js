@@ -1,1 +1,1 @@
-export const sheetPadding = '20px';
+export const sheetPadding = '26px';

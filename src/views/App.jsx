@@ -19,21 +19,24 @@ export const Input = styled.input`
   box-sizing: border-box;
   display: block;
   width: 100%;
-  padding: 20px ${sheetPadding };
-  font-size: 16px;
+  line-height: 62px;
+  padding: 0 ${sheetPadding};
+  font-size: 20px;
   border: none;
-  border-bottom: 1px solid #ddd;
 `
 
 export const Filter = styled.div`
-  padding: 5px ${sheetPadding};
+  padding: 9px ${sheetPadding} 8px;
+  border-top: 1px solid #ddd;
 `
 
 const FilterLink = styled.span`
-  text-decoration: underline;
-  cursor: pointer;
-  margin-right: 20px;
-  color: ${props => props.active ? 'green' : 'inherit'};
+  cursor: ${props => props.active ? 'default' : 'pointer'};
+  margin-right: 15px;
+  opacity: ${props => props.active ? 1 : 0.4};
+  &:hover {
+    opacity: ${props => props.active ? 1 : 0.6};
+  }
 `
 
 type FilterValue = 'all' | 'current';
