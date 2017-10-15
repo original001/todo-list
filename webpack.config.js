@@ -26,6 +26,10 @@ module.exports = {
           path.join(__dirname, 'src'),
         ],
       },
+      {
+        test: /\.svg/,
+        loader: 'url-loader?limit=8192',
+      },
     ],
   },
   plugins: [
