@@ -1,6 +1,6 @@
 // @flow //
 import React from 'react';
-import {ItemWrapper, Action, Close, Check, TextItem} from './styles';
+import {ItemWrapper, Action, Close, Check, TextItem, Time} from './styles';
 
 type Props = {
   checked: boolean,
@@ -11,13 +11,13 @@ type Props = {
 
 export class Item extends React.Component {
   props: Props;
-
   render() {
     const props = this.props;
     return (
       <ItemWrapper>
         <Action />
         <TextItem checked={props.checked}>{props.children}</TextItem>
+        <Time></Time>
         {props.checked ||
           <Check onClick={this.props.onCheck}/>
         }

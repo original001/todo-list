@@ -24,6 +24,7 @@ export const Action = styled.div`
 
 export const TextItem = styled.div`
   display: inline-block;
+  margin-right: 30px;
   font-size: 14px;
   text-decoration: ${props => props.checked ? 'line-through' : 'none'};
 `
@@ -60,4 +61,9 @@ export const Check = styled(RightIcon)`
   &:hover {
     background-image: url('${checkHoverIcon}');
   }
+`
+
+export const Time = styled.div`
+  display: inline-block;
+  font-size: 14px;
 `
