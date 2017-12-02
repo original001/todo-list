@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="8px" height="11px" viewBox="0 0 8 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
-    <title>start</title>
+    <title>start-hover</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Play" transform="translate(-9.000000, -7.000000)" stroke="#DDDDDD">
-            <circle id="Oval" cx="11.5" cy="12.5" r="11.5"></circle>
-            <polygon id="start" points="16.5 12.6666667 9.5 17.3333333 9.5 8"></polygon>
+        <g id="Play-Hover" transform="translate(-9.000000, -7.000000)">
+            <circle id="Oval" stroke="#DDDDDD" cx="11.5" cy="12.5" r="11.5"></circle>
+            <polygon id="start" stroke="#404040" points="16.5 12.6666667 9.5 17.3333333 9.5 8"></polygon>
         </g>
     </g>
 </svg>
